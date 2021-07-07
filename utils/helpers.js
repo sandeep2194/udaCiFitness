@@ -1,3 +1,8 @@
+import React from "react"
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 export function isBetween(num, x, y) {
     if (num >= x && num <= y) {
         return true
@@ -38,4 +43,88 @@ export function timeToString(time = Date.now()) {
     const date = new Date(time)
     const todayUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
     return todayUTC.toISOString().split('T')[0]
+}
+export function getMetricMetaInfo(metric) {
+    const info = {
+        run: {
+            displayName: 'Run',
+            max: 50,
+            unit: 'miles',
+            step: 1,
+            type: 'steppers',
+            getIcon: () => {
+                return (
+                    <MaterialIcons
+                        name='directions-run'
+                        color='black'
+                        size={35}
+                    />)
+            }
+        },
+        bike:
+        {
+            displayName: 'Bike',
+            max: 100,
+            unit: 'miles',
+            step: 1,
+            type: 'steppers',
+            getIcon: () => {
+                return (
+                    <MaterialCommunityIcons
+                        name='bike'
+                        color='black'
+                        size={35}
+                    />
+                )
+            }
+        },
+        swim: {
+            displayName: 'Swim',
+            max: 9900,
+            unit: 'meters',
+            step: 100,
+            type: 'steppers',
+            getIcon: () => {
+                return (
+                    <MaterialCommunityIcons
+                        name='swim'
+                        color='black'
+                        size={35}
+                    />)
+            }
+
+        },
+        sleep: {
+            displayName: 'Sleep',
+            max: 24,
+            unit: 'hours',
+            step: 1,
+            type: 'slider',
+            getIcon: () => {
+                return (
+                    <FontAwesome
+                        name='bed'
+                        color='black'
+                        size={35}
+                    />)
+            }
+
+        },
+        eat: {
+            displayName: 'Eat',
+            max: 10,
+            unit: 'rating',
+            step: 1,
+            type: 'slider',
+            getIcon: () => {
+                return (
+                    <MaterialCommunityIcons
+                        name='food'
+                        color='black'
+                        size={35}
+                    />)
+            }
+        },
+    }
+    return !metric ? info : info[metric]
 }
