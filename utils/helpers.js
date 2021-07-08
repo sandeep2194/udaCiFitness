@@ -1,7 +1,9 @@
 import React from "react"
+import { View, StyleSheet } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { red, orange, blue, white, lightPurp, pink } from './colors'
 
 export function isBetween(num, x, y) {
     if (num >= x && num <= y) {
@@ -44,6 +46,19 @@ export function timeToString(time = Date.now()) {
     const todayUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
     return todayUTC.toISOString().split('T')[0]
 }
+
+const styles = StyleSheet.create({
+    iconContainer: {
+        padding: 5,
+        borderRadius: 8,
+        width: 50,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20,
+    }
+})
+
 export function getMetricMetaInfo(metric) {
     const info = {
         run: {
@@ -54,11 +69,14 @@ export function getMetricMetaInfo(metric) {
             type: 'steppers',
             getIcon: () => {
                 return (
-                    <MaterialIcons
-                        name='directions-run'
-                        color='black'
-                        size={35}
-                    />)
+                    <View style={[styles.iconContainer, { backgroundColor: red, }]}>
+                        <MaterialIcons
+                            name='directions-run'
+                            color={white}
+                            size={35}
+                        />
+                    </View>
+                )
             }
         },
         bike:
@@ -70,11 +88,14 @@ export function getMetricMetaInfo(metric) {
             type: 'steppers',
             getIcon: () => {
                 return (
-                    <MaterialCommunityIcons
-                        name='bike'
-                        color='black'
-                        size={35}
-                    />
+                    <View style={[styles.iconContainer, { backgroundColor: orange, }]}>
+                        <MaterialCommunityIcons
+                            name='bike'
+                            color={white}
+                            size={35}
+                        />
+
+                    </View>
                 )
             }
         },
@@ -86,11 +107,14 @@ export function getMetricMetaInfo(metric) {
             type: 'steppers',
             getIcon: () => {
                 return (
-                    <MaterialCommunityIcons
-                        name='swim'
-                        color='black'
-                        size={35}
-                    />)
+                    <View style={[styles.iconContainer, { backgroundColor: blue, }]}>
+                        <MaterialCommunityIcons
+                            name='swim'
+                            color={white}
+                            size={35}
+                        />
+                    </View>
+                )
             }
 
         },
@@ -102,11 +126,14 @@ export function getMetricMetaInfo(metric) {
             type: 'slider',
             getIcon: () => {
                 return (
-                    <FontAwesome
-                        name='bed'
-                        color='black'
-                        size={35}
-                    />)
+                    <View style={[styles.iconContainer, { backgroundColor: lightPurp, }]}>
+                        <FontAwesome
+                            name='bed'
+                            color={white}
+                            size={35}
+                        />
+                    </View>
+                )
             }
 
         },
@@ -118,11 +145,14 @@ export function getMetricMetaInfo(metric) {
             type: 'slider',
             getIcon: () => {
                 return (
-                    <MaterialCommunityIcons
-                        name='food'
-                        color='black'
-                        size={35}
-                    />)
+                    <View style={[styles.iconContainer, { backgroundColor: pink, }]}>
+                        <MaterialCommunityIcons
+                            name='food'
+                            color={white}
+                            size={35}
+                        />
+                    </View>
+                )
             }
         },
     }
