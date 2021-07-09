@@ -10,8 +10,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, HeaderStyleInterpolators } from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import { purple, white, gray } from './utils/colors'
 import EntryDetail from './components/EntryDetail'
+import Live from './components/Live'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,13 +21,17 @@ const Stack = createStackNavigator();
 function MainNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Tabs} />
+      <Stack.Screen name="Home" component={Tabs}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="EntryDetail" component={EntryDetail}
         options={{
           headerTintColor: white,
           headerStyle: {
             backgroundColor: purple,
-          }
+          },
         }}
       />
     </Stack.Navigator>
@@ -36,14 +42,17 @@ function Tabs() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
-          let iconName;
+          let icon;
           if (route.name === 'History') {
-            iconName = 'bookmark'
+            icon = <FontAwesome name={'bookmark'} size={24} color={focused ? purple : gray} />
           }
           else if (route.name === 'AddEntry') {
-            iconName = 'plus-square'
+            icon = <FontAwesome name={'plus-square'} size={24} color={focused ? purple : gray} />
           }
-          return <FontAwesome name={iconName} size={24} color={focused ? purple : gray} />
+          else if (route.name === 'Live') {
+            icon = <Ionicons name={'speedometer'} size={24} color={focused ? purple : gray} />
+          }
+          return icon
         }
       })}
       tabBarOptions={{
@@ -64,6 +73,7 @@ function Tabs() {
     >
       <Tab.Screen name="History" component={History} />
       <Tab.Screen name="AddEntry" component={AddEntry} />
+      <Tab.Screen name="Live" component={Live} />
     </Tab.Navigator>
   )
 }

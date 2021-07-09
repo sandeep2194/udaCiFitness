@@ -10,6 +10,7 @@ import { submitEntry, removeEntry } from '../utils/api'
 import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 import { white, purple } from '../utils/colors'
+import { CommonActions } from '@react-navigation/native';
 
 
 function SubmitButton({ onPress }) {
@@ -69,7 +70,8 @@ class AddEntry extends Component {
             sleep: 0,
             eat: 0,
         })
-        // Navigate to home
+
+        this.toHome()
 
         submitEntry({ entry, key })
 
@@ -82,9 +84,16 @@ class AddEntry extends Component {
             [key]: getDailyReminderValue()
         }))
 
-        //Route to home
+        this.toHome()
 
         removeEntry(key)
+    }
+    toHome = () => {
+        const backAction = {
+            ...CommonActions.goBack(),
+            source: 'AddEntry',
+        }
+        this.props.navigation.dispatch(backAction)
     }
     render() {
         const metaInfo = getMetricMetaInfo()
